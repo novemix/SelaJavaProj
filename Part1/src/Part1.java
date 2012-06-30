@@ -40,7 +40,7 @@ public class Part1 {
 				System.out.print(io);
 			}
 		}
-	}
+	} // loadInputFile
 	
 	private static void loadData(String data) {
 		String[] d = data.split(",");
