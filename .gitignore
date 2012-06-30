@@ -1,0 +1,12 @@
+
+bin/Part1.class
+
+bin/vehicle/Bike.class
+
+bin/vehicle/Car.class
+
+bin/vehicle/IPrintInformation.class
+
+bin/vehicle/Truck.class
+
+bin/vehicle/Vehicle.class
