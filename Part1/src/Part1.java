@@ -64,7 +64,7 @@ public class Part1 {
 	
 
 	public static void main(String[] args) {
-		loadInputFile("/part1vehicles.txt");
+		loadInputFile("/JavaProj/part1vehicles.txt");
 		m_cars[5].printInfo();
 		System.out.println();
 		m_trucks[1].printInfo();
