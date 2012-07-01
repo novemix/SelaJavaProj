@@ -12,3 +12,5 @@ bin/vehicle/Truck.class
 bin/vehicle/Vehicle.class
 
 .DS_Store
+
+bin/company/Company.class

@@ -1,6 +1,6 @@
 package vehicle;
 
-public class Car extends Vehicle implements IPrintInformation {
+public class Car extends Vehicle {
 	
 	protected boolean m_hasAC;
 
@@ -9,9 +9,8 @@ public class Car extends Vehicle implements IPrintInformation {
 		m_hasAC = i_hasAC;
 	}
 	
-	public void printInfo() {
-		super.printInfo();
-		System.out.print(" Has A/C: " + ( m_hasAC ? "yes" : "no" ));
+	public String toString() {
+		return super.toString() + " Has A/C: " + ( m_hasAC ? "yes" : "no" );
 	}
 
 	@Override

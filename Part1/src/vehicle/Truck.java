@@ -1,6 +1,6 @@
 package vehicle;
 
-public class Truck extends Vehicle implements IPrintInformation {
+public class Truck extends Vehicle {
 	
 	protected int m_weightLimit;
 	
@@ -9,9 +9,8 @@ public class Truck extends Vehicle implements IPrintInformation {
 		m_weightLimit = i_weightLimit;
 	} 
 	
-	public void printInfo() {
-		super.printInfo();
-		System.out.print(" Weight Limit: " + m_weightLimit);
+	public String toString() {
+		return super.toString() + " Weight Limit: " + m_weightLimit;
 	}
 
 	@Override
