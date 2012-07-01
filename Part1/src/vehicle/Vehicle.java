@@ -30,8 +30,8 @@ public abstract class Vehicle implements Comparable<Vehicle> {
 				+ m_odometer + " Engine Capacity: " + m_engineCC;
 	} // toString()
 
-	public int compareTo(Vehicle vehicle) {
-		return m_id.compareTo(((Vehicle) vehicle).m_id);
+	public int compareTo(Vehicle i_vehicle) {
+		return m_id.compareTo(((Vehicle) i_vehicle).m_id);
 		/*
 		if (o instanceof Vehicle) {
 			return m_id.compareTo(((Vehicle) o).m_id);
@@ -42,8 +42,8 @@ public abstract class Vehicle implements Comparable<Vehicle> {
 		*/
 	}
 	
-	public boolean equals(Vehicle vehicle) {
-		return this.m_id.equals(vehicle.m_id);
+	public boolean equals(Vehicle i_vehicle) {
+		return this.m_id.equals(i_vehicle.m_id);
 	}
 	
 	public int hashCode() {

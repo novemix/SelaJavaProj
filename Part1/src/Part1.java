@@ -8,7 +8,7 @@ public class Part1 {
 		String drive = System.getProperty("os.name").substring(0,6).equals("Windows") ? "C:" : "";
 		String vehicleList = drive + "/JavaProj/part1vehicles.txt";
 		
-		Company theCompany = new Company(vehicleList);
+		Company theCompany = new Company(vehicleList, 10);
 		
 		theCompany.printVehicles(VehicleType.All);
 		System.out.println();

@@ -18,7 +18,7 @@ import vehicle.*;
  */
 public class Company {
 	
-		private static final int VEHICLE_MAX = 10;
+		private final int VEHICLE_MAX;
 		
 		private int m_totalCars = 0;
 		private int m_totalTrucks = 0;
@@ -27,18 +27,19 @@ public class Company {
 		TreeSet<Vehicle> m_vehicles;
 		
 		// Constructor
-		public Company(String inputFile) {
-			readInputFile(inputFile);
+		public Company(String i_inputFile, int i_vehicleMaximum) {
+			VEHICLE_MAX = i_vehicleMaximum;
+			readInputFile(i_inputFile);
 			m_vehicles = new TreeSet<Vehicle>(m_vehiclesHashSet);
 			m_vehiclesHashSet = null;
 		} // Constructor
 		
 		// File access, call parseData on successful reads
-		private void readInputFile(String file) {
+		private void readInputFile(String i_file) {
 			FileReader input = null;
 			BufferedReader bufIn = null;
 			try {
-				input = new FileReader(file);
+				input = new FileReader(i_file);
 				bufIn = new BufferedReader(input);
 				
 				String line;
@@ -61,8 +62,8 @@ public class Company {
 		} // readInputFile
 		
 		// Called from readInputFile method
-		private void parseData(String data) {
-			String[] d = data.split(",");
+		private void parseData(String i_data) {
+			String[] d = i_data.split(",");
 			// TODO: act on boolean return from add, report error and/or throw exception
 			if (d[0].equals("Car") && m_totalCars < VEHICLE_MAX) {
 				m_vehiclesHashSet.add(new Car(d[1],d[2],Integer.parseInt(d[3]),Integer.parseInt(d[4]),d[5].equals("yes") ? true : false));
