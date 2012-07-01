@@ -25,13 +25,14 @@ public class Company {
 		HashSet<Vehicle> m_vehiclesHashSet = new HashSet<Vehicle>();
 		TreeSet<Vehicle> m_vehicles; // new TreeSet<Vehicle>(foo);
 		
-		
+		// Constructor
 		public Company(String inputFile) {
 			readInputFile(inputFile);
 			m_vehicles = new TreeSet<Vehicle>(m_vehiclesHashSet);
 			m_vehiclesHashSet = null;
 		} // Constructor
 		
+		// File access, call parseData on successful reads
 		private void readInputFile(String file) {
 			FileReader input = null;
 			BufferedReader bufIn = null;
@@ -58,8 +59,10 @@ public class Company {
 			}
 		} // readInputFile
 		
-		private void parseData(String data) { // called from readInputFile method
+		// Called from readInputFile method
+		private void parseData(String data) {
 			String[] d = data.split(",");
+			// todo: act on boolean return from add, report error and/or throw exception
 			if (d[0].equals("Car") && m_totalCars < VEHICLE_MAX) {
 				m_vehiclesHashSet.add(new Car(d[1],d[2],Integer.parseInt(d[3]),Integer.parseInt(d[4]),d[5].equals("yes") ? true : false));
 				m_totalCars++;
