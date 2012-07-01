@@ -21,6 +21,10 @@ public class Part1 {
 		System.out.println();
 		theCompany.printVehicles(vtype.Car);
 		
+		System.out.println("all: " + theCompany.getTotal(vtype.All));
+		System.out.println("cars: " + theCompany.getTotal(vtype.Car));
+		System.out.println("trucks: " + theCompany.getTotal(vtype.Truck));
+		System.out.println("bikes: " + theCompany.getTotal(vtype.Bike));
 	}
 	
 }

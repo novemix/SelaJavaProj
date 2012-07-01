@@ -78,6 +78,17 @@ public class Company {
 			}
 		} // parseData
 		
+		public int getTotal(vtype i_vehicleType) {
+			int allTotal = m_totalCars + m_totalTrucks + m_totalBikes;
+			switch(i_vehicleType) {
+				case All:	return allTotal;
+				case Car:	return m_totalCars;
+				case Truck:	return m_totalTrucks;
+				case Bike:	return m_totalBikes;
+				default:	return allTotal;
+			}
+		}
+		
 		public void printVehicles(vtype i_vehicleType) {
 			Iterator<Vehicle> it = m_vehicles.iterator();
 			Vehicle it_vehicle;
