@@ -12,15 +12,6 @@ public class Part1 {
 
 		Company theCompany = new Company(vehicleList, 10);
 
-		/*
-		 * 
-		 * theCompany.printVehicles(VehicleType.All); System.out.println();
-		 * System.out.println(); theCompany.printVehicles(VehicleType.Truck);
-		 * System.out.println(); System.out.println();
-		 * theCompany.printVehicles(VehicleType.Bike); System.out.println();
-		 * System.out.println(); theCompany.printVehicles(VehicleType.Car);
-		 */
-
 		Scanner kbPrintAll = new Scanner(System.in);
 		Scanner kbPrintNumber = new Scanner(System.in);
 		Scanner kbPrintType = new Scanner(System.in);
@@ -55,7 +46,12 @@ public class Part1 {
 		System.out
 				.println("-----------------------------------------------------------------------------");
 
+		/*
+		 * PRINT ALL VEHICLES
+		 */
+
 		String printAllChoice = kbPrintAll.nextLine();
+
 		if (printAllChoice.equalsIgnoreCase("y")) {
 			/*
 			 * PRINT ALL CARS
