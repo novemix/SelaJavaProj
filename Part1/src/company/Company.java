@@ -7,7 +7,8 @@ import java.util.TreeSet;
 import java.util.Iterator;
 
 
-import vehicle.*;/**
+import vehicle.*;
+/**
  * 
  */
 
@@ -62,7 +63,7 @@ public class Company {
 		// Called from readInputFile method
 		private void parseData(String data) {
 			String[] d = data.split(",");
-			// todo: act on boolean return from add, report error and/or throw exception
+			// TODO: act on boolean return from add, report error and/or throw exception
 			if (d[0].equals("Car") && m_totalCars < VEHICLE_MAX) {
 				m_vehiclesHashSet.add(new Car(d[1],d[2],Integer.parseInt(d[3]),Integer.parseInt(d[4]),d[5].equals("yes") ? true : false));
 				m_totalCars++;
@@ -77,10 +78,14 @@ public class Company {
 			}
 		} // parseData
 		
-		public void printVehicles() {
-			Iterator<Vehicle> I = m_vehicles.iterator();
-			while (I.hasNext()) {
-				System.out.println(I.next());
+		public void printVehicles(vtype i_vehicleType) {
+			Iterator<Vehicle> it = m_vehicles.iterator();
+			Vehicle it_vehicle;
+			while (it.hasNext()) {
+				it_vehicle = it.next();
+				if (i_vehicleType == vtype.All || it_vehicle.type() == i_vehicleType) {
+					System.out.println(it_vehicle);
+				}
 			}
 		} // printVehicles
 } // class

@@ -14,3 +14,5 @@ bin/vehicle/Vehicle.class
 .DS_Store
 
 bin/company/Company.class
+
+bin/vehicle/vtype.class
