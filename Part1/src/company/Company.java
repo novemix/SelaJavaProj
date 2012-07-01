@@ -24,7 +24,7 @@ public class Company {
 		private int m_totalTrucks = 0;
 		private int m_totalBikes = 0;
 		HashSet<Vehicle> m_vehiclesHashSet = new HashSet<Vehicle>();
-		TreeSet<Vehicle> m_vehicles; // new TreeSet<Vehicle>(foo);
+		TreeSet<Vehicle> m_vehicles;
 		
 		// Constructor
 		public Company(String inputFile) {
