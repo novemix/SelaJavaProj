@@ -29,13 +29,16 @@ public class Company {
 		// Constructor
 		public Company(String i_inputFile, int i_vehicleMaximum) {
 			VEHICLE_MAX = i_vehicleMaximum;
-			readInputFile(i_inputFile);
+			File inputFile = new File(i_inputFile);
+			if (inputFile.exists()) {
+				readInputFile(inputFile);
+			}
 			m_vehicles = new TreeSet<Vehicle>(m_vehiclesHashSet);
 			m_vehiclesHashSet = null;
 		} // Constructor
 		
 		// File access, call parseData on successful reads
-		private void readInputFile(String i_file) {
+		private void readInputFile(File i_file) {
 			FileReader input = null;
 			BufferedReader bufIn = null;
 			try {
