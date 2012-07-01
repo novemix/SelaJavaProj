@@ -1,6 +1,6 @@
 
 import company.*;
-import vehicle.vtype;
+import vehicle.VehicleType;
 
 public class Part1 {
 	
@@ -10,21 +10,21 @@ public class Part1 {
 		
 		Company theCompany = new Company(vehicleList);
 		
-		theCompany.printVehicles(vtype.All);
+		theCompany.printVehicles(VehicleType.All);
 		System.out.println();
 		System.out.println();
-		theCompany.printVehicles(vtype.Truck);
+		theCompany.printVehicles(VehicleType.Truck);
 		System.out.println();
 		System.out.println();
-		theCompany.printVehicles(vtype.Bike);
+		theCompany.printVehicles(VehicleType.Bike);
 		System.out.println();
 		System.out.println();
-		theCompany.printVehicles(vtype.Car);
+		theCompany.printVehicles(VehicleType.Car);
 		
-		System.out.println("all: " + theCompany.getTotal(vtype.All));
-		System.out.println("cars: " + theCompany.getTotal(vtype.Car));
-		System.out.println("trucks: " + theCompany.getTotal(vtype.Truck));
-		System.out.println("bikes: " + theCompany.getTotal(vtype.Bike));
+		System.out.println("all: " + theCompany.getTotal(VehicleType.All));
+		System.out.println("cars: " + theCompany.getTotal(VehicleType.Car));
+		System.out.println("trucks: " + theCompany.getTotal(VehicleType.Truck));
+		System.out.println("bikes: " + theCompany.getTotal(VehicleType.Bike));
 	}
 	
 }

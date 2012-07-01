@@ -78,7 +78,7 @@ public class Company {
 			}
 		} // parseData
 		
-		public int getTotal(vtype i_vehicleType) {
+		public int getTotal(VehicleType i_vehicleType) {
 			int allTotal = m_totalCars + m_totalTrucks + m_totalBikes;
 			switch(i_vehicleType) {
 				case All:	return allTotal;
@@ -89,12 +89,12 @@ public class Company {
 			}
 		}
 		
-		public void printVehicles(vtype i_vehicleType) {
+		public void printVehicles(VehicleType i_vehicleType) {
 			Iterator<Vehicle> it = m_vehicles.iterator();
 			Vehicle it_vehicle;
 			while (it.hasNext()) {
 				it_vehicle = it.next();
-				if (i_vehicleType == vtype.All || it_vehicle.type() == i_vehicleType) {
+				if (i_vehicleType == VehicleType.All || it_vehicle.type() == i_vehicleType) {
 					System.out.println(it_vehicle);
 				}
 			}

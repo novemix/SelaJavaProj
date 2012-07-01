@@ -16,3 +16,5 @@ bin/vehicle/Vehicle.class
 bin/company/Company.class
 
 bin/vehicle/vtype.class
+
+bin/vehicle/VehicleType.class

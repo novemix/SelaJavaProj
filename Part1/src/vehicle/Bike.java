@@ -8,7 +8,7 @@ public class Bike extends Vehicle {
 
 	@Override
 	protected void setType() {
-		m_type = vtype.Bike;
+		m_type = VehicleType.Bike;
 
 	}
 

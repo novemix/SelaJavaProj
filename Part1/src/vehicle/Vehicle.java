@@ -6,7 +6,7 @@ public abstract class Vehicle implements Comparable<Vehicle> {
 	protected String m_name;
 	protected int m_odometer;
 	protected int m_engineCC;
-	protected vtype m_type; 
+	protected VehicleType m_type; 
 
 	// Constructor, vehicle object
 
@@ -20,7 +20,7 @@ public abstract class Vehicle implements Comparable<Vehicle> {
 	
 	protected abstract void setType();
 
-	public vtype type() {
+	public VehicleType type() {
 		return m_type;
 	}
 	

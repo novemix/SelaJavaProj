@@ -1,5 +1,5 @@
 package vehicle;
 
-public enum vtype {
+public enum VehicleType {
 	All, Car, Truck, Bike;
 }

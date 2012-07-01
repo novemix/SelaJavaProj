@@ -15,7 +15,7 @@ public class Car extends Vehicle {
 
 	@Override
 	protected void setType() {
-		m_type = vtype.Car;
+		m_type = VehicleType.Car;
 		
 	}
 }
