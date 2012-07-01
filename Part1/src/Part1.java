@@ -1,6 +1,6 @@
 
 import company.*;
-import vehicle.*;
+import vehicle.vtype;
 
 public class Part1 {
 	
