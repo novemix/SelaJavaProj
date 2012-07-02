@@ -1,10 +1,27 @@
 import java.util.Scanner;
 
+import part2.company.CompanyBuySell;
+
 import company.*;
 import vehicle.UserInterface;
 import vehicle.VehicleType;
 
 public class Part1 {
+
+	public static String getUserEntry() {
+		Scanner input = new Scanner(System.in);
+		return input.nextLine();
+	}
+
+	public static void menuSelection(boolean i_listAnswer) {
+		String input;
+		input = getUserEntry().toUpperCase();
+		while ((!i_listAnswer && !input.equals("1") && !input.equals("2") && !input
+				.equals("3")) || (i_listAnswer && !input.equals("4"))) {
+			System.out.println("Selection not valid, please choose again.");
+			input = getUserEntry().toUpperCase();
+		}
+	}
 
 	public static void main(String[] args) {
 		String drive = System.getProperty("os.name").substring(0, 6)
@@ -29,65 +46,87 @@ public class Part1 {
 
 		String printChoice = kbPrintChoice.nextLine();
 
-		if (printChoice.equalsIgnoreCase("1")) {
-			main.printCarMenu();
-			theCompany.printVehicles(VehicleType.Car);
+		while ((!printChoice.equals("1") && !printChoice.equals("2") && !printChoice
+				.equals("3")) || !printChoice.equals("4")) {
 
-			main.printTruckMenu();
-			theCompany.printVehicles(VehicleType.Truck);
+			printChoice = getUserEntry().toUpperCase();
 
-			main.printBikeMenu();
-			theCompany.printVehicles(VehicleType.Bike);
+			if (printChoice.equalsIgnoreCase("1")) {
 
-			/******************************************************************************************
-			 * OPTION 2: PRINT VEHICLES BY TYPE
-			 ******************************************************************************************/
-
-		} else if (printChoice.equalsIgnoreCase("2")) {
-			Scanner kbPrintType = new Scanner(System.in);
-			System.out.println("Which type? (Type 'Car,' 'Truck,' or 'Bike')");
-			String printType = kbPrintType.nextLine();
-
-			// PRINT CAR TYPE
-
-			if (printType.equalsIgnoreCase("Car")) {
-				main.printCarType();
+				main.printCarMenu();
 				theCompany.printVehicles(VehicleType.Car);
-			} else if (printType.equalsIgnoreCase("Truck")) {
-				main.printTruckType();
-			} else if (printType.equalsIgnoreCase("Bike")) {
-				main.printBikeType();
+
+				main.printTruckMenu();
+				theCompany.printVehicles(VehicleType.Truck);
+
+				main.printBikeMenu();
 				theCompany.printVehicles(VehicleType.Bike);
-			}
 
-			/******************************************************************************************
-			 * OPTION 3: NUMBER OF VEHICLES
-			 ******************************************************************************************/
+				main.printMain();
 
-		} else if (printChoice.equalsIgnoreCase("3")) {
-			System.out.println("Which type? (Type 'Car,' 'Truck,' or 'Bike')");
-			String printNumber = kbPrintNumber.nextLine();
+				/******************************************************************************************
+				 * OPTION 2: PRINT VEHICLES BY TYPE
+				 ******************************************************************************************/
 
-			if (printNumber.equalsIgnoreCase("Car")) {
-				System.out.print(theCompany.getTotal(VehicleType.Car));
-				main.printCarNumber();
+			} else if (printChoice.equalsIgnoreCase("2")) {
+				Scanner kbPrintType = new Scanner(System.in);
+				System.out
+						.println("Which type? (Type 'Car,' 'Truck,' or 'Bike')");
+				String printType = kbPrintType.nextLine();
 
-			} else if (printNumber.equalsIgnoreCase("Truck")) {
-				System.out.print(theCompany.getTotal(VehicleType.Truck));
-				main.printTruckNumber();
-			} else if (printNumber.equalsIgnoreCase("Bike")) {
-				System.out.print(theCompany.getTotal(VehicleType.Bike));
-				main.printBikeNumber();
-			}
+				// PRINT CAR TYPE
 
-			/******************************************************************************************
-			 * OPTION 4: QUIT PROGRAM
-			 ******************************************************************************************/
+				if (printType.equalsIgnoreCase("Car")) {
+					main.printCarType();
+					theCompany.printVehicles(VehicleType.Car);
+					main.printMain();
+				} else if (printType.equalsIgnoreCase("Truck")) {
+					main.printTruckType();
+					theCompany.printVehicles(VehicleType.Truck);
+					main.printMain();
+				} else if (printType.equalsIgnoreCase("Bike")) {
+					main.printBikeType();
+					theCompany.printVehicles(VehicleType.Bike);
+					main.printMain();
+				}
 
-			else if (printChoice.equalsIgnoreCase("4")) {
+				/******************************************************************************************
+				 * OPTION 3: NUMBER OF VEHICLES
+				 ******************************************************************************************/
+
+			} else if (printChoice.equalsIgnoreCase("3")) {
+				System.out
+						.println("Which type? (Type 'Car,' 'Truck,' or 'Bike')");
+				String printNumber = kbPrintNumber.nextLine();
+
+				if (printNumber.equalsIgnoreCase("Car")) {
+					System.out.print(theCompany.getTotal(VehicleType.Car));
+					main.printCarNumber();
+					main.printMain();
+
+				} else if (printNumber.equalsIgnoreCase("Truck")) {
+					System.out.print(theCompany.getTotal(VehicleType.Truck));
+					main.printTruckNumber();
+					main.printMain();
+				} else if (printNumber.equalsIgnoreCase("Bike")) {
+					System.out.print(theCompany.getTotal(VehicleType.Bike));
+					main.printBikeNumber();
+					main.printMain();
+				}
+
+				/******************************************************************************************
+				 * OPTION 4: QUIT PROGRAM
+				 ******************************************************************************************/
+
+			} else if (printChoice.equalsIgnoreCase("4")) {
 				System.out.println("Exiting program...");
 				System.exit(0);
 			}
+
+			else {
+				System.out.println("Selection not valid, please choose again.");
+			}
 		}
+
 	}
 }
