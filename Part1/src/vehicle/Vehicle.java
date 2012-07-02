@@ -39,15 +39,7 @@ public abstract class Vehicle implements Comparable<Vehicle> {
 	} // toString()
 
 	public int compareTo(Vehicle i_vehicle) {
-		return m_id.compareTo(((Vehicle) i_vehicle).m_id);
-		/*
-		if (o instanceof Vehicle) {
-			return m_id.compareTo(((Vehicle) o).m_id);
-		}
-		else {
-			return this.compareTo(o);
-		}
-		*/
+		return m_id.compareTo(i_vehicle.m_id);
 	}
 	
 	public boolean equals(Vehicle i_vehicle) {

@@ -9,7 +9,8 @@ public class Part1 {
 	public static void main(String[] args) {
 		String drive = System.getProperty("os.name").substring(0, 6)
 				.equals("Windows") ? "C:" : "";
-		String vehicleList = drive + "/JavaProj/part1vehicles.txt";
+		String projectPath = System.getProperty("user.dir");
+		String vehicleList = drive + projectPath + "/part1/part1vehicles.txt";
 
 		Company theCompany = new Company(vehicleList, 10);
 

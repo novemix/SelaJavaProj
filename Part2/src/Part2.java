@@ -107,9 +107,11 @@ public class Part2 {
 	}
 
 	public static void main(String[] args) {
-		String drive = System.getProperty("os.name").substring(0,6).equals("Windows") ? "C:" : "";
-		String vehicleListDealer = drive + "/JavaProj/part2vehiclesDealer.txt";
-		String vehicleListA = drive + "/JavaProj/part2vehiclesA.txt";
+		String drive = System.getProperty("os.name").substring(0, 6)
+				.equals("Windows") ? "C:" : "";
+		String projectPath = System.getProperty("user.dir");
+		String vehicleListDealer = drive + projectPath + "/part2/part2vehiclesDealer.txt";
+		String vehicleListA = drive + projectPath + "/part2/part2vehiclesA.txt";
 		
 		dealership = new CompanyBuySell(vehicleListDealer, 100);
 		dealership.setName("Dealership");
