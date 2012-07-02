@@ -1,0 +1,3 @@
+Car,c01,Ford One,21000,1100,no,11000
+Truck,t01,Chevy One,41000,3100,11000,31000
+Bike,b01,Honda One,1000,100,3100
