@@ -1,0 +1,108 @@
+Name:Fiat Uno
+Tag Id:SEA-34452
+================== 
+Available for rent: yes
+Price/day: 120/1
+Customer:
+Smoke Free: yes
+Number of seats: 6
+Air bags:yes
+Air Conditioning:yes
+Automatic: no
+Power Windows:yes  
+AM/FM Radio:yes
+Power Steering:no 
+Power Brakes:yes
+Type of Vehicle:small
+
+
+Name:Ford Flex 
+Tag Id:SEA-245789
+----------------
+Available for rent: no
+Price/day: 90/1
+Customer: Mike Tyson
+Number of seats: 5
+Air bags:yes
+Air Conditioning:no
+Automatic: yes
+Power Windows:no  
+AM/FM Radio:yes
+Power Steering:yes 
+Power Brakes:yes
+Type of Vehicle:SUV
+ 
+ 
+Name:Chevrolet Cruze 
+Tag Id:SEA-232452
+-----------------
+Available for rent: yes
+Price/day: 87/1
+Customer: 
+Smoke Free: yes
+Number of seats: 4
+Air bags:yes
+Air Conditioning:yes
+Automatic: yes
+Power Windows:yes  
+AM/FM Radio:yes
+Power Steering:yes 
+Power Brakes:yes
+Type of Vehicle:Family
+
+
+Name:Chevrolet JT700 
+Tag Id:SEA-989784
+-----------------
+Available for rent: yes
+Price/day: 87/1
+Customer: 
+Smoke Free: yes
+Number of seats: 7
+Air bags:yes
+Air Conditioning:yes
+Automatic: yes
+Power Windows:no  
+AM/FM Radio:no
+Power Steering:no 
+Power Brakes:no
+Type of Vehicle:Big
+
+Name:BMW X7-Jx 
+Tag Id:SEA-039432
+------------------
+Available for rent: yes
+Price/day: 66/1
+Customer: 
+Smoke Free: yes
+Number of seats: 8
+Air bags:yes
+Air Conditioning:no
+Automatic: yes
+Power Windows:no  
+AM/FM Radio:no
+Power Steering:yes 
+Power Brakes:no
+Type of Vehicle:Big
+
+
+Name:Ford Mondeio
+Tag Id:SEA-265772
+------------------
+Available for rent: yes
+Price/day: 180/1
+Customer: 
+Smoke Free: yes
+Number of seats: 4
+Air bags:yes
+Air Conditioning:yes
+Automatic: yes
+Power Windows:yes  
+AM/FM Radio:yes
+Power Steering:no 
+Power Brakes:yes
+Type of Vehicle:Jeep
+
+
+ 
+ 

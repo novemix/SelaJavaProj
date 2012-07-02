@@ -1,0 +1,109 @@
+Name:Hyundai Accent
+Tag Id:SEA-56732
+================== 
+Available for rent: yes
+Price/day: 120/1
+Customer:
+Smoke Free: yes
+Number of seats: 6
+Air bags:yes
+Air Conditioning:yes
+Automatic: no
+Power Windows:yes  
+AM/FM Radio:yes
+Power Steering:no 
+Power Brakes:yes
+Type of Vehicle:small
+
+
+Name:Ford Focus 
+Tag Id:SEA-7737
+----------------
+Available for rent: no
+Price/day: 90/1
+Customer: David Bassa
+Smoke Free: yes
+Number of seats: 5
+Air bags:yes
+Air Conditioning:no
+Automatic: yes
+Power Windows:yes  
+AM/FM Radio:yes
+Power Steering:yes 
+Power Brakes:yes
+Type of Vehicle:SUV
+ 
+ 
+Name:Chevrolet Cruze 
+Tag Id:SEA-67672
+-----------------
+Available for rent: yes
+Price/day: 87/1
+Customer: 
+Smoke Free: yes
+Number of seats: 4
+Air bags:yes
+Air Conditioning:yes
+Automatic: yes
+Power Windows:yes  
+AM/FM Radio:yes
+Power Steering:yes 
+Power Brakes:yes
+Type of Vehicle:Family
+
+
+Name:Chevrolet Impala 
+Tag Id:SEA-53367
+-----------------
+Available for rent: yes
+Price/day: 87/1
+Customer: 
+Smoke Free: yes
+Number of seats: 7
+Air bags:yes
+Air Conditioning:yes
+Automatic: yes
+Power Windows:yes  
+AM/FM Radio:no
+Power Steering:yes 
+Power Brakes:no
+Type of Vehicle:Big
+
+Name:BMW X3 
+Tag Id:SEA-55757
+------------------
+Available for rent: yes
+Price/day: 57/1
+Customer: 
+Smoke Free: yes
+Number of seats: 5
+Air bags:yes
+Air Conditioning:yes
+Automatic: yes
+Power Windows:no  
+AM/FM Radio:no
+Power Steering:yes 
+Power Brakes:no
+Type of Vehicle:Big
+
+
+Name:Ford Flex
+Tag Id:SEA-45623
+------------------
+Available for rent: no
+Price/day: 180/1
+Customer: Elrom Silvera
+Smoke Free: yes
+Number of seats: 8
+Air bags:yes
+Air Conditioning:yes
+Automatic: yes
+Power Windows:yes  
+AM/FM Radio:yes
+Power Steering:yes 
+Power Brakes:yes
+Type of Vehicle:Jeep
+
+
+ 
+ 
