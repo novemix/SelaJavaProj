@@ -43,13 +43,11 @@ public class Part1 {
 		/******************************************************************************************
 		 * OPTION 1: PRINT ALL VEHICLES
 		 ******************************************************************************************/
-
+		
 		String printChoice = kbPrintChoice.nextLine();
 
 		while ((!printChoice.equals("1") && !printChoice.equals("2") && !printChoice
-				.equals("3")) || !printChoice.equals("4")) {
-
-			printChoice = getUserEntry().toUpperCase();
+				.equals("3")) || !printChoice.equals("4")) {			
 
 			if (printChoice.equalsIgnoreCase("1")) {
 
@@ -63,7 +61,7 @@ public class Part1 {
 				theCompany.printVehicles(VehicleType.Bike);
 
 				main.printMain();
-
+				printChoice = getUserEntry();
 				/******************************************************************************************
 				 * OPTION 2: PRINT VEHICLES BY TYPE
 				 ******************************************************************************************/
@@ -89,7 +87,7 @@ public class Part1 {
 					theCompany.printVehicles(VehicleType.Bike);
 					main.printMain();
 				}
-
+				printChoice = getUserEntry();
 				/******************************************************************************************
 				 * OPTION 3: NUMBER OF VEHICLES
 				 ******************************************************************************************/
@@ -113,7 +111,7 @@ public class Part1 {
 					main.printBikeNumber();
 					main.printMain();
 				}
-
+				printChoice = getUserEntry();
 				/******************************************************************************************
 				 * OPTION 4: QUIT PROGRAM
 				 ******************************************************************************************/
@@ -125,6 +123,7 @@ public class Part1 {
 
 			else {
 				System.out.println("Selection not valid, please choose again.");
+				printChoice = getUserEntry();
 			}
 		}
 
