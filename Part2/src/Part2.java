@@ -26,8 +26,7 @@ public class Part2 {
 	
 	public static CompanyBuySell selectCompany(boolean i_listDealership) {
 		String input;
-		System.out.println();
-		System.out.println("Select company to work with:");
+		System.out.println("company to work with:");
 		System.out.println("A. Company A");
 		System.out.println("B. Company B");
 		if (i_listDealership) {
@@ -64,8 +63,22 @@ public class Part2 {
 	}
 	
 	public static void printFleet(CompanyBuySell i_company) {
-		System.out.println(i_company.name() + "'s fleet:");
+		System.out.println(i_company.name() + "'s fleet:  (funds: " + i_company.getBankBalance() + ")");
 		i_company.printVehicles(VehicleType.All);	
+	}
+	
+	public static void printSummary() {
+		System.out.println();
+		System.out.print(firstCompany.name());
+		System.out.print( isBuying ? " buying from " : " selling to " );
+		System.out.println(secondCompany.name());
+		
+		if (isBuying) {
+			System.out.println(firstCompany.name() + " funds: " + firstCompany.getBankBalance());
+		}
+		else {
+			System.out.println(secondCompany.name() + " funds: " + secondCompany.getBankBalance());
+		}
 	}
 	
 	public static Vehicle selectVehicle() {
@@ -93,16 +106,17 @@ public class Part2 {
 			buyer = secondCompany;
 			seller = firstCompany;
 		}
-		if (buyer.buyVehicle(theVehicle)) {
+		if (buyer.ableToBuy(theVehicle)) {
 			seller.sellVehicle(theVehicle);
+			buyer.buyVehicle(theVehicle);
 			System.out.println();
 			printFleet(firstCompany);
 			System.out.println();
 			printFleet(secondCompany);
 		}
 		else {
-			System.out.println("There was a problem, transaction not performed...");
-			System.out.println("Most likely causes are insufficient funds or fleet at maximum for that type.");
+			System.out.println("\n" + "There was a problem, transaction not performed...");
+			System.out.println("Cause is either insufficient funds or fleet at maximum for that type.");
 		}
 	}
 
@@ -110,27 +124,35 @@ public class Part2 {
 		String drive = System.getProperty("os.name").substring(0, 6)
 				.equals("Windows") ? "C:" : "";
 		String projectPath = System.getProperty("user.dir");
-		String vehicleListDealer = drive + projectPath + "/part2/part2vehiclesDealer.txt";
 		String vehicleListA = drive + projectPath + "/part2/part2vehiclesA.txt";
+		String vehicleListDealer = drive + projectPath + "/part2/part2vehiclesDealer.txt";
 		
-		dealership = new CompanyBuySell(vehicleListDealer, 100);
-		dealership.setName("Dealership");
 		rentalCompanyA = new CompanyBuySell(vehicleListA, 10);
 		rentalCompanyA.setName("Company A");
+		rentalCompanyA.setBankBalance(30000);
 		rentalCompanyB = new CompanyBuySell("", 10);
 		rentalCompanyB.setName("Company B");
 		rentalCompanyB.setBankBalance(500000);
+		dealership = new CompanyBuySell(vehicleListDealer, 100);
+		dealership.setName("Dealership");
+		dealership.setBankBalance(20000);
 		
 		while (true) {
+			System.out.print("\n" + "Choose first ");
 			firstCompany = selectCompany( ! showDealership);
 			if (firstCompany == null) { break; }
+			System.out.print("\n" + "Choose second ");
 			secondCompany = selectCompany(showDealership);
 			if (secondCompany == null) { break; }
 			isBuying = selectBuyOrSell();
-			System.out.println("\n" + firstCompany.name() + ( isBuying ? " buying from " : " selling to " ) + secondCompany.name());
+			printSummary();
 			theVehicle = selectVehicle();
 			if (theVehicle != null) {
 				performTransaction();
+			}
+			else
+			{
+				System.out.println("\n" + "No action taken.");
 			}
 		}
 		System.out.println("End.");

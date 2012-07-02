@@ -51,7 +51,7 @@ public class CompanyBuySell extends Company {
 		return m_bankBalance;
 	}
 	
-	public boolean buyVehicle(Vehicle i_vehicle) {
+	public boolean ableToBuy(Vehicle i_vehicle) {
 		boolean underMax = false;
 		switch (i_vehicle.type()) {
 		case Car:
@@ -64,8 +64,11 @@ public class CompanyBuySell extends Company {
 			underMax = ( m_totalBikes < VEHICLE_MAX );
 			break;
 		}
-		
-		if (underMax && m_bankBalance >= getVehicleValue(i_vehicle)) {
+		return (underMax && m_bankBalance >= getVehicleValue(i_vehicle));
+	}
+	
+	public boolean buyVehicle(Vehicle i_vehicle) {
+		if (ableToBuy(i_vehicle)) {
 			i_vehicle.setID(getNewID(i_vehicle.type()));
 			if (m_vehicles.add(i_vehicle)) {
 				switch (i_vehicle.type()) {
@@ -79,6 +82,7 @@ public class CompanyBuySell extends Company {
 					m_totalBikes++;
 					break;
 				}
+				m_bankBalance -= getVehicleValue(i_vehicle);
 				return true;
 			}
 			else {
@@ -88,7 +92,6 @@ public class CompanyBuySell extends Company {
 		else {
 			return false;
 		}
-		
 	}
 	
 	public void sellVehicle(Vehicle i_vehicle) {
