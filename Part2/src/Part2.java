@@ -26,6 +26,7 @@ public class Part2 {
 	
 	public static CompanyBuySell selectCompany(boolean i_listDealership) {
 		String input;
+		System.out.println();
 		System.out.println("Select company to work with:");
 		System.out.println("A. Company A");
 		System.out.println("B. Company B");
@@ -53,12 +54,56 @@ public class Part2 {
 		String input;
 		do
 		{
+			System.out.println();
 			System.out.print("buy or sell: ");
 			input = getUserEntry().toLowerCase();
 		}
 		while (!input.equals("buy") && !input.equals("sell"));
 		
 		return input.equals("buy") ? true : false;
+	}
+	
+	public static void printFleet(CompanyBuySell i_company) {
+		System.out.println(i_company.name() + "'s fleet:");
+		i_company.printVehicles(VehicleType.All);	
+	}
+	
+	public static Vehicle selectVehicle() {
+		System.out.println();
+		if (isBuying) {
+			printFleet(secondCompany);
+			System.out.print(" - enter ID of vehicle to buy (or 'none'): ");
+			return secondCompany.getVehicleByID(getUserEntry());
+		}
+		else
+		{
+			printFleet(firstCompany);
+			System.out.print(" - enter ID of vehicle to sell (or 'none'): ");
+			return firstCompany.getVehicleByID(getUserEntry());
+		}
+	}
+	
+	public static void performTransaction() {
+		CompanyBuySell buyer, seller;
+		if (isBuying) {
+			buyer = firstCompany;
+			seller = secondCompany;
+		}
+		else {
+			buyer = secondCompany;
+			seller = firstCompany;
+		}
+		if (buyer.buyVehicle(theVehicle)) {
+			seller.sellVehicle(theVehicle);
+			System.out.println();
+			printFleet(firstCompany);
+			System.out.println();
+			printFleet(secondCompany);
+		}
+		else {
+			System.out.println("There was a problem, transaction not performed...");
+			System.out.println("Most likely causes are insufficient funds or fleet at maximum for that type.");
+		}
 	}
 
 	public static void main(String[] args) {
@@ -74,21 +119,17 @@ public class Part2 {
 		rentalCompanyB.setName("Company B");
 		rentalCompanyB.setBankBalance(500000);
 		
-		rentalCompanyA.printVehicles(VehicleType.All);
-		System.out.println();
-		dealership.printVehicles(VehicleType.All);
-		
 		while (true) {
 			firstCompany = selectCompany( ! showDealership);
 			if (firstCompany == null) { break; }
-			System.out.println(firstCompany.name());
 			secondCompany = selectCompany(showDealership);
 			if (secondCompany == null) { break; }
-			System.out.println(secondCompany.name());
 			isBuying = selectBuyOrSell();
-			System.out.println("buying: " + isBuying);
-			// select vehicle
-			// complete transaction if possible
+			System.out.println("\n" + firstCompany.name() + ( isBuying ? " buying from " : " selling to " ) + secondCompany.name());
+			theVehicle = selectVehicle();
+			if (theVehicle != null) {
+				performTransaction();
+			}
 		}
 		System.out.println("End.");
 	}

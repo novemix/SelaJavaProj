@@ -24,6 +24,14 @@ public abstract class Vehicle implements Comparable<Vehicle> {
 		return m_type;
 	}
 	
+	public void setID(String i_id) {
+		m_id = i_id;
+	}
+	
+	public String ID() {
+		return m_id;
+	}
+	
 	@Override
 	public String toString() {
 		return "ID: " + m_id + " Name: " + m_name + " Odometer: "
