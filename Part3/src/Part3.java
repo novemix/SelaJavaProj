@@ -204,21 +204,9 @@ public class Part3 {
 			}
 		}
 		/* interface -
-		 *  - rent
-		 *    - choose company
-		 *    - enter vehicle type
-		 *    - rental period
-		 *    - list only cars matching criteria
-		 *    - select by tag id
-		 *    - confirmation
-		 *  
 		 *  - return
 		 *    - display bill on screen
 		 *    - save bill under Company/Bills/
-		 *    
-		 *  - other actions
-		 *    - print all rented vehicles with customers
-		 *    - printing all vehicles
 		 */
 
 	} // main
