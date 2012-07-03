@@ -39,12 +39,29 @@ public class Company {
 		return m_name;
 	}
 	
+	public Vehicle getVehicleByID(String i_id) {
+		Iterator<Vehicle> it = m_vehicles.iterator();
+		Vehicle it_vehicle;
+		while (it.hasNext()) {
+			it_vehicle = it.next();
+			if (it_vehicle.m_tagID.equals(i_id)) {
+				return it_vehicle;
+			}
+		}
+		return null;
+	}
+	
 	public Customer getCustomerByName(String i_name) {
 		for (Customer c : m_customers) {
 			if (c.name().equals(i_name)) { return c; }
 		}
 		return null;
 	} // getCustomerByName
+	
+	public void rentVehicle(Vehicle i_vehicle, Customer i_customer, int i_period) {
+		i_vehicle.rent(i_customer, i_period);
+		m_customers.add(i_customer);
+	}
 	
 	public boolean returnCustomerVehicle(Customer i_customer) {
 		billCustomer(i_customer);

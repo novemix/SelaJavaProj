@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 import part3.company.Company;
 import part3.customer.Customer;
-import part3.vehicle.VehicleType;
+import part3.vehicle.*;
 /**
  * @author Administrator
  *
@@ -68,18 +68,58 @@ public class Part3 {
 				input = 0;
 				System.out.println("Please enter a number.");
 			}
-			if (input > max) {
+			if (input > max || input < 0) {
 				System.out.println("Invalid choice, please try again.");
 			}
-		} while (input == 0 || input > max);
+		} while (input <= 0 || input > max);
 		return vtypes[--input]; // --input to reset to 0 base
 	}
 	
-	static void rentVehicle(Company i_company, VehicleType i_type) {
-		System.out.println("\n" + i_company.name() + " has the following " + i_type + " cars available:");
-		i_company.printVehicles(i_type, availableOnly); 
+	static int selectPeriod() {
+		int input;
+		do {
+			System.out.print("\n" + "Number of days desired: ");
+			try {
+				input = Integer.parseInt(getUserEntry());
+			} catch (NumberFormatException e) {
+				input = 0;
+				System.out.println("Please enter a number.");
+			}
+			if (input < 0) {
+				System.out.println("Invalid choice, please try again.");
+			}
+		} while (input <= 0);
+		return input;
 	}
 		
+	static void rentVehicle(Company i_company, VehicleType i_type) {
+		System.out.println("\n" + i_company.name() + " has the following " + i_type + " cars available:");
+		i_company.printVehicles(i_type, availableOnly);
+		String input;
+		Vehicle vehicle;
+		int period;
+		String name;
+		do {
+			System.out.print("Please enter the ID of your choice (or 'none'): ");
+			input = getUserEntry();
+			vehicle = i_company.getVehicleByID(input.toUpperCase());
+		} while ((!input.equals("none") && vehicle == null) || (vehicle != null && !vehicle.m_isAvailable));
+		if ( ! input.equals("none")) {
+			period = selectPeriod();
+			System.out.println("\n" + "Please confirm rental from " + i_company.name() + " for " + period + " days:");
+			System.out.println(vehicle);
+			System.out.print("\n" + "Enter your name to confirm, or nothing to cancel: ");
+			name = getUserEntry();
+			if ( ! name.equals("")) {
+				i_company.rentVehicle(vehicle, new Customer(name), period);
+				System.out.println("\n" + "Enjoy your " + vehicle.m_name + "!");
+			}
+			else {
+				System.out.println("\n" + "No action taken.");
+			}
+		}
+	}
+	
 	static void returnVehicle(Company i_company) {
 		String input;
 		Customer customer;
