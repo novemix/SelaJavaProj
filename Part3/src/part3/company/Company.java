@@ -95,13 +95,47 @@ public class Company {
 	}
 	
 	protected void billCustomer(Customer i_customer) {
-		int bill = i_customer.period() * i_customer.rentedVehicle().m_pricePerDay;
+		String vehicleName = i_customer.rentedVehicle().m_name;
+		int rate = i_customer.rentedVehicle().m_pricePerDay;
+		int period = i_customer.period();
+		int total = rate * period;
 		System.out.println("\n" + "Thank you " + i_customer.name() + "!");
-		System.out.println("Your amount due is: " + bill);
+		System.out.println("We hope you enjoyed your " + period + " days with your " + vehicleName + ".");
+		System.out.println("Your amount due is: " + period + " days at " + rate + " per day = " + total);
 		System.out.println("Have a nice day now.");
-		System.out.println("TODO: print bill to file");
+		writeBillToFile(i_customer);
 	} // billCustomer
 
+	protected void writeBillToFile(Customer i_customer) {
+		String drive = System.getProperty("os.name").substring(0, 6)
+				.equals("Windows") ? "C:" : "";
+		String projectPath = System.getProperty("user.dir");
+		String fullPathAndFilename = drive + projectPath + "/part3/" + m_name + "/" + i_customer.name() + ".txt";
+		File outputFile = new File(fullPathAndFilename);
+		BufferedWriter output = null;
+		try {
+			outputFile.getParentFile().mkdirs();
+			outputFile.setWritable(true);
+			output = new BufferedWriter(new FileWriter(outputFile));
+			Vehicle vehicle = i_customer.rentedVehicle();
+			output.write(vehicle.m_tagID + " - " + vehicle.m_name + ", "
+					+ vehicle.m_pricePerDay + "/day, " + i_customer.period()
+					+ " days, total: "
+					+ (vehicle.m_pricePerDay * i_customer.period()));
+		}
+		catch (IOException io) {
+			System.out.println(io);
+		}
+		finally {
+			try {
+				output.close();
+			}
+			catch (IOException io) {
+				System.out.print(io);
+			}
+		}
+	}
+	
 	protected void readInputFile(File i_file) {
 		FileReader input = null;
 		BufferedReader bufIn = null;

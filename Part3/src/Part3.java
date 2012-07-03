@@ -1,5 +1,5 @@
 /**
- * 
+ * Driver and Interface for Car Rental Application
  */
 
 import java.util.Scanner;
@@ -8,20 +8,29 @@ import part3.company.Company;
 import part3.customer.Customer;
 import part3.vehicle.*;
 /**
- * @author Administrator
+ * @author Mark Redden
  *
  */
 public class Part3 {
 	
+	/*
+	 * Member Declarations
+	 */
 	static Company avis;
 	static Company hertz;
 	static final boolean availableOnly = true;
 	
+	/*
+	 * Helper method for user input
+	 */
 	static String getUserEntry() {
 		Scanner input = new Scanner(System.in);
 		return input.nextLine();
 	} // getUserEntry
 	
+	/*
+	 * Display initial menu and return choice
+	 */
 	static String welcomeMenu() {
 		String input;
 		do
@@ -40,6 +49,9 @@ public class Part3 {
 				: input.equals("3") ? "advanced" : "quit";
 	} // welcomeMenu
 	
+	/*
+	 * Company selection, returns company selected
+	 */
 	static Company selectCompany() {
 		String input;
 		do {
@@ -52,6 +64,9 @@ public class Part3 {
 		return input.equals("1") ? avis : hertz;
 	}
 	
+	/*
+	 * Vehicle type selection
+	 */
 	static VehicleType selectVehicleType() {
 		int input;
 		VehicleType[] vtypes = VehicleType.values();
@@ -75,6 +90,9 @@ public class Part3 {
 		return vtypes[--input]; // --input to reset to 0 base
 	}
 	
+	/*
+	 * Rental period selection
+	 */
 	static int selectPeriod() {
 		int input;
 		do {
@@ -91,7 +109,10 @@ public class Part3 {
 		} while (input <= 0);
 		return input;
 	}
-		
+	
+	/*
+	 * Display list of available vehicles and carry out rental
+	 */
 	static void rentVehicle(Company i_company, VehicleType i_type, int i_period) {
 		System.out.println("\n" + i_company.name() + " has the following " + i_type + " cars available:");
 		i_company.printVehicles(i_type, availableOnly);
@@ -103,13 +124,18 @@ public class Part3 {
 			vehicle = i_company.getVehicleByID(input.toUpperCase());
 		} while ((!input.equals("none") && vehicle == null) || (vehicle != null && !vehicle.m_isAvailable));
 		if ( ! input.equals("none")) {
-			System.out.println("\n" + "Please confirm rental from " + i_company.name() + " for " + i_period + " days:");
-			System.out.println(vehicle);
+			System.out.println("\n" + "Please confirm rental from " + i_company.name() + ":");
+			System.out.println("  " + vehicle.m_name + ", " + i_period + " days at " + vehicle.m_pricePerDay + " per day.");
 			System.out.print("\n" + "Enter your name to confirm, or nothing to cancel: ");
 			String name = getUserEntry();
-			if ( ! name.equals("")) {
-				i_company.rentVehicle(vehicle, new Customer(name), i_period);
-				System.out.println("\n" + "Enjoy your " + vehicle.m_name + "!");
+			if ( ! name.equals("") ) {
+				if (i_company.getCustomerByName(name) == null) {
+					i_company.rentVehicle(vehicle, new Customer(name), i_period);
+					System.out.println("\n" + "  Thank you.  Enjoy your " + vehicle.m_name + "!");
+				}
+				else {
+					System.out.println("\n" + "Sorry, we can't rent more than 1 car per customer.");
+				}
 			}
 			else {
 				System.out.println("\n" + "No action taken.");
@@ -117,6 +143,9 @@ public class Part3 {
 		}
 	}
 	
+	/*
+	 * Process returned vehicle
+	 */
 	static void returnVehicle(Company i_company) {
 		String input;
 		Customer customer;
@@ -133,6 +162,9 @@ public class Part3 {
 		}
 	}
 	
+	/*
+	 * Display advanced menu and return choice
+	 */
 	static String advancedMenu() {
 		String input;
 		do
@@ -147,6 +179,9 @@ public class Part3 {
 		return input.equals("1") ? "rented" : input.equals("2") ? "all" : "return";
 	} // advancedMenu
 	
+	/*
+	 * Advanced menu, display all rented vehicles
+	 */
 	static void printRentedVehicles() {
 		System.out.println("\n" + "Avis rented cars:\n-----------------");
 		avis.printRentedVehicles();
@@ -154,6 +189,9 @@ public class Part3 {
 		hertz.printRentedVehicles();
 	} // printRentedVehicles
 	
+	/*
+	 * Advanced menu, print all vehicles
+	 */
 	static void printAllVehicles() {
 		System.out.println("\n" + "Avis fleet:\n-----------");
 		avis.printVehicles(VehicleType.All, ! availableOnly);
@@ -165,15 +203,18 @@ public class Part3 {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		// Setup files
 		String drive = System.getProperty("os.name").substring(0, 6)
 				.equals("Windows") ? "C:" : "";
 		String projectPath = System.getProperty("user.dir");
 		String vehicleFileAvis = drive + projectPath + "/part3/avis_cars.txt";
 		String vehicleFileHertz = drive + projectPath + "/part3/hertz_cars.txt";
 		
+		// Create companies, initial load from files
 		avis = new Company("Avis", vehicleFileAvis);
 		hertz = new Company("Hertz", vehicleFileHertz);
-			
+		
+		// Main loop
 		String option;
 		while(true) {
 			switch(welcomeMenu()) {
@@ -203,11 +244,6 @@ public class Part3 {
 				System.exit(0);
 			}
 		}
-		/* interface -
-		 *  - return
-		 *    - display bill on screen
-		 *    - save bill under Company/Bills/
-		 */
 
 	} // main
 
