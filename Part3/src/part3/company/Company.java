@@ -35,6 +35,10 @@ public class Company {
 		m_vehiclesHashSet = null;
 	} // Constructor
 	
+	public String name() {
+		return m_name;
+	}
+	
 	public Customer getCustomerByName(String i_name) {
 		for (Customer c : m_customers) {
 			if (c.name().equals(i_name)) { return c; }
@@ -48,13 +52,15 @@ public class Company {
 		return m_customers.remove(i_customer);
 	} // returnCustomerVehicle
 	
-	public void printVehicles(VehicleType i_vehicleType) {
+	public void printVehicles(VehicleType i_vehicleType, boolean i_availableOnly) {
 		Iterator<Vehicle> it = m_vehicles.iterator();
 		Vehicle it_vehicle;
 		while (it.hasNext()) {
 			it_vehicle = it.next();
 			if (i_vehicleType == VehicleType.All || it_vehicle.type() == i_vehicleType) {
-				System.out.println(it_vehicle);
+				if ((i_availableOnly && it_vehicle.m_isAvailable) || ! i_availableOnly) {
+					System.out.println(it_vehicle);
+				}
 			}
 		}
 	} // printVehicles
@@ -76,6 +82,7 @@ public class Company {
 		System.out.println("\n" + "Thank you " + i_customer.name() + "!");
 		System.out.println("Your amount due is: " + bill);
 		System.out.println("Have a nice day now.");
+		System.out.println("TODO: print bill to file");
 	} // billCustomer
 
 	protected void readInputFile(File i_file) {

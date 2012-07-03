@@ -15,6 +15,7 @@ public class Part3 {
 	
 	static Company avis;
 	static Company hertz;
+	static final boolean availableOnly = true;
 	
 	static String getUserEntry() {
 		Scanner input = new Scanner(System.in);
@@ -51,10 +52,34 @@ public class Part3 {
 		return input.equals("1") ? avis : hertz;
 	}
 	
-	static void rentVehicle(Company i_company) {
-		System.out.println("Rent car from " + i_company);
+	static VehicleType selectVehicleType() {
+		int input;
+		VehicleType[] vtypes = VehicleType.values();
+		int max = vtypes.length - 1; // we don't want last type - All
+		do {
+			System.out.println("\n" + "Please select the type of vehicle desired:");
+			for (int i = 0 ; i < max ; i++) {
+				System.out.println("  " + (i + 1) + ". " + vtypes[i]); // +1 to start at 1, not 0
+			}
+			System.out.print("Choice: ");
+			try {
+				input = Integer.parseInt(getUserEntry());
+			} catch (NumberFormatException e) {
+				input = 0;
+				System.out.println("Please enter a number.");
+			}
+			if (input > max) {
+				System.out.println("Invalid choice, please try again.");
+			}
+		} while (input == 0 || input > max);
+		return vtypes[--input]; // --input to reset to 0 base
 	}
 	
+	static void rentVehicle(Company i_company, VehicleType i_type) {
+		System.out.println("\n" + i_company.name() + " has the following " + i_type + " cars available:");
+		i_company.printVehicles(i_type, availableOnly); 
+	}
+		
 	static void returnVehicle(Company i_company) {
 		String input;
 		Customer customer;
@@ -94,9 +119,9 @@ public class Part3 {
 	
 	static void printAllVehicles() {
 		System.out.println("\n" + "Avis fleet:\n-----------");
-		avis.printVehicles(VehicleType.All);
+		avis.printVehicles(VehicleType.All, ! availableOnly);
 		System.out.println("\n" + "Hertz fleet:\n------------");
-		hertz.printVehicles(VehicleType.All);
+		hertz.printVehicles(VehicleType.All, ! availableOnly);
 	} // printAllVehicles
 	
 	/**
@@ -116,7 +141,7 @@ public class Part3 {
 		while(true) {
 			switch(welcomeMenu()) {
 			case "rent":
-				rentVehicle(selectCompany());
+				rentVehicle(selectCompany(), selectVehicleType());
 				break;
 			case "return":
 				returnVehicle(selectCompany());
