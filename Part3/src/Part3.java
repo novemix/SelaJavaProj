@@ -114,8 +114,11 @@ public class Part3 {
 	 * Display list of available vehicles and carry out rental
 	 */
 	static void rentVehicle(Company i_company, VehicleType i_type, int i_period) {
+		// Display available cars
 		System.out.println("\n" + i_company.name() + " has the following " + i_type + " cars available:");
 		i_company.printVehicles(i_type, availableOnly);
+		
+		// Get ID of chosen car
 		String input;
 		Vehicle vehicle;
 		do {
@@ -123,6 +126,8 @@ public class Part3 {
 			input = getUserEntry();
 			vehicle = i_company.getVehicleByID(input.toUpperCase());
 		} while ((!input.equals("none") && vehicle == null) || (vehicle != null && !vehicle.m_isAvailable));
+		
+		// Confirm and carry out
 		if ( ! input.equals("none")) {
 			System.out.println("\n" + "Please confirm rental from " + i_company.name() + ":");
 			System.out.println("  " + vehicle.m_name + ", " + i_period + " days at " + vehicle.m_pricePerDay + " per day.");
@@ -193,6 +198,7 @@ public class Part3 {
 	 * Advanced menu, print all vehicles
 	 */
 	static void printAllVehicles() {
+		// Display all vehicle, available and unavailable
 		System.out.println("\n" + "Avis fleet:\n-----------");
 		avis.printVehicles(VehicleType.All, ! availableOnly);
 		System.out.println("\n" + "Hertz fleet:\n------------");

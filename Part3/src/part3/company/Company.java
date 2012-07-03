@@ -1,5 +1,5 @@
 /**
- * 
+ * Company class for Part3.java car rental application
  */
 package part3.company;
 
@@ -13,10 +13,11 @@ import part3.customer.*;
 import part3.vehicle.*;
 
 /**
- * @author Administrator
+ * @author Mark Redden
  *
  */
 public class Company {
+	// Members
 	protected String m_name;
 	protected Vehicle m_currentVehicle;
 	protected ArrayList<Customer> m_customers = new ArrayList<Customer>();
@@ -25,6 +26,7 @@ public class Company {
 	protected HashSet<Vehicle> m_vehiclesHashSet = new HashSet<Vehicle>();
 	protected TreeSet<Vehicle> m_vehicles;
 	
+	// Constructor
 	public Company(String i_name, String i_inputFile) {
 		m_name = i_name;
 		File inputFile = new File(i_inputFile);
@@ -37,7 +39,7 @@ public class Company {
 	
 	public String name() {
 		return m_name;
-	}
+	} // name
 	
 	public Vehicle getVehicleByID(String i_id) {
 		Iterator<Vehicle> it = m_vehicles.iterator();
@@ -49,7 +51,7 @@ public class Company {
 			}
 		}
 		return null;
-	}
+	} // getVehicleByID
 	
 	public Customer getCustomerByName(String i_name) {
 		for (Customer c : m_customers) {
@@ -61,7 +63,7 @@ public class Company {
 	public void rentVehicle(Vehicle i_vehicle, Customer i_customer, int i_period) {
 		i_vehicle.rent(i_customer, i_period);
 		m_customers.add(i_customer);
-	}
+	} // rentVehicle
 	
 	public boolean returnCustomerVehicle(Customer i_customer) {
 		billCustomer(i_customer);
@@ -92,7 +94,7 @@ public class Company {
 
 	public String toString() {
 		return m_name;
-	}
+	} // toString
 	
 	protected void billCustomer(Customer i_customer) {
 		String vehicleName = i_customer.rentedVehicle().m_name;
@@ -107,16 +109,20 @@ public class Company {
 	} // billCustomer
 
 	protected void writeBillToFile(Customer i_customer) {
+		// Setup Files
 		String drive = System.getProperty("os.name").substring(0, 6)
 				.equals("Windows") ? "C:" : "";
 		String projectPath = System.getProperty("user.dir");
 		String fullPathAndFilename = drive + projectPath + "/part3/" + m_name + "/" + i_customer.name() + ".txt";
+		
+		// Objects
 		File outputFile = new File(fullPathAndFilename);
 		BufferedWriter output = null;
 		try {
 			outputFile.getParentFile().mkdirs();
 			outputFile.setWritable(true);
 			output = new BufferedWriter(new FileWriter(outputFile));
+			// Output
 			Vehicle vehicle = i_customer.rentedVehicle();
 			output.write(vehicle.m_tagID + " - " + vehicle.m_name + ", "
 					+ vehicle.m_pricePerDay + "/day, " + i_customer.period()
@@ -134,7 +140,7 @@ public class Company {
 				System.out.print(io);
 			}
 		}
-	}
+	} // writeBillToFile
 	
 	protected void readInputFile(File i_file) {
 		FileReader input = null;
@@ -145,6 +151,7 @@ public class Company {
 			
 			String line;
 			while ((line = bufIn.readLine()) != null) {
+				// Process input line
 				parseData(line);
 			}
 		}
@@ -164,13 +171,14 @@ public class Company {
 	
 	// Called from readInputFile method
 	protected void parseData(String i_data) {
+		// Lines will be pairs separated by colon
 		String[] d = i_data.split(":");
 		String key = d[0].trim().toLowerCase();
 		String value = "";
-		if (d.length > 1) {
+		if (d.length > 1) { // some lines have no colon, so only 1st element will be populated
 			value = d[1].trim();
 		}
-		// TODO: act on boolean return from add, report error and/or throw exception
+		// Take action on each key/value pair from file
 		switch (key) {
 		case "name":
 			m_currentVehicle = new Vehicle(value);

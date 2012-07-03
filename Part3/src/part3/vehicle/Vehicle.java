@@ -1,14 +1,16 @@
 /**
- * 
+ * Vehicle class for Part3.java car rental application
  */
 package part3.vehicle;
 
 import part3.customer.Customer;
 /**
- * @author Administrator
+ * @author Mark Redden
  *
  */
 public class Vehicle implements Comparable<Vehicle>{
+	// Members, we're making them public to avoid a mass of getters and setters
+	//  if more operations are required for any element, getter and setter will be implemented
 	public String m_name;
 	public String m_tagID;
 	public boolean m_isAvailable = false;
@@ -26,24 +28,25 @@ public class Vehicle implements Comparable<Vehicle>{
 	public boolean m_hasPowerBrakes = false;
 	public VehicleType m_type;
 	
+	// Constructor
 	public Vehicle(String i_name) {
 		m_name = i_name;
-	}
+	} // Constructor
 	
 	public VehicleType type() {
 		return m_type;
-	}
+	} // VehicleType
 	
 	public void rent(Customer i_customer, int i_period) {
 		m_customerName = i_customer.name();
 		m_isAvailable = false;
 		i_customer.rentVehicle(this, i_period);
-	}
+	} // rent
 	
 	public void returnIt() {
 		m_customerName = "";
 		m_isAvailable = true;
-	}
+	} // returnIt
 
 	public String toString() {
 		return String.format("%-10s - %-6s - %-17s - Price: %3d", m_tagID,
@@ -60,17 +63,17 @@ public class Vehicle implements Comparable<Vehicle>{
 								: "no", m_hasPowerWindows ? "Y" : "N",
 						m_hasPowerBrakes ? "Y" : "N",
 						m_hasPowerSteering ? "Y" : "N");
-	}
+	} // toString
 	
 	public int compareTo(Vehicle i_vehicle) {
 		return m_tagID.compareTo(i_vehicle.m_tagID);
-	}
+	} // compareTo
 	
 	public boolean equals(Vehicle i_vehicle) {
 		return this.m_tagID.equals(i_vehicle.m_tagID);
-	}
+	} // equals
 	
 	public int hashCode() {
 		return Integer.parseInt(m_tagID.substring(4));
-	}
+	} // hashCode
 }
