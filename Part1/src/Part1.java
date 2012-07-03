@@ -1,3 +1,6 @@
+/*
+ * Application for displaying car rental company vehicles
+ */
 import java.util.Scanner;
 
 import company.*;
@@ -6,11 +9,13 @@ import vehicle.VehicleType;
 
 public class Part1 {
 
+	// Helper method for user input
 	public static String getUserEntry() {
 		Scanner input = new Scanner(System.in);
 		return input.nextLine();
 	}
 
+	// Get user menu choice
 	public static void menuSelection(boolean i_listAnswer) {
 		String input;
 		input = getUserEntry().toUpperCase();
@@ -22,11 +27,13 @@ public class Part1 {
 	}
 
 	public static void main(String[] args) {
+		// Setup files
 		String drive = System.getProperty("os.name").substring(0, 6)
 				.equals("Windows") ? "C:" : "";
 		String projectPath = System.getProperty("user.dir");
 		String vehicleList = drive + projectPath + "/part1/part1vehicles.txt";
 
+		// Declare the company
 		Company theCompany = new Company(vehicleList, 10);
 
 		// Main menu interface

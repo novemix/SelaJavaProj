@@ -1,11 +1,19 @@
-
+/**
+ * Main driver/user interface for vehicle buying/selling application
+ */
 import java.util.Scanner;
 
 import vehicle.*;
 import part2.company.*;
 
+/**
+ * @author Mark Redden
+ *
+ */
 public class Part2 {
-
+	/*
+	 * Members
+	 */
 	static CompanyBuySell dealership;
 	static CompanyBuySell rentalCompanyA;
 	static CompanyBuySell rentalCompanyB;
@@ -18,11 +26,14 @@ public class Part2 {
 	/**
 	 * @param args
 	 */
+	
+	// Helper method for user input
 	public static String getUserEntry() {
 		Scanner input = new Scanner(System.in);
 		return input.nextLine();
 	}
 	
+	// Select and return company, optionally listing dealership
 	public static CompanyBuySell selectCompany(boolean i_listDealership) {
 		String input;
 		System.out.println("company to work with:");
@@ -48,6 +59,7 @@ public class Part2 {
 						: input.equals("C") ? dealership : null;
 	}
 	
+	// Choose whether first company is buying or selling
 	public static boolean selectBuyOrSell() {
 		String input;
 		do
@@ -61,11 +73,13 @@ public class Part2 {
 		return input.equals("buy") ? true : false;
 	}
 	
+	// Display all vehicles for specified company
 	public static void printFleet(CompanyBuySell i_company) {
 		System.out.println(i_company.name() + "'s fleet:  (funds: " + i_company.getBankBalance() + ")");
 		i_company.printVehicles(VehicleType.All);	
 	}
 	
+	// Summary of what is to take place
 	public static void printSummary() {
 		System.out.println();
 		System.out.print(firstCompany.name());
@@ -80,6 +94,7 @@ public class Part2 {
 		}
 	}
 	
+	// Select and return vehicle choice
 	public static Vehicle selectVehicle() {
 		System.out.println();
 		if (isBuying) {
@@ -95,6 +110,7 @@ public class Part2 {
 		}
 	}
 	
+	// Carry out the transfer of vehicle
 	public static void performTransaction() {
 		CompanyBuySell buyer, seller;
 		if (isBuying) {
@@ -120,12 +136,14 @@ public class Part2 {
 	}
 
 	public static void main(String[] args) {
+		// Setup files
 		String drive = System.getProperty("os.name").substring(0, 6)
 				.equals("Windows") ? "C:" : "";
 		String projectPath = System.getProperty("user.dir");
 		String vehicleListA = drive + projectPath + "/part2/part2vehiclesA.txt";
 		String vehicleListDealer = drive + projectPath + "/part2/part2vehiclesDealer.txt";
 		
+		// Setup companies
 		rentalCompanyA = new CompanyBuySell(vehicleListA, 10);
 		rentalCompanyA.setName("Company A");
 		rentalCompanyA.setBankBalance(30000);
@@ -136,6 +154,7 @@ public class Part2 {
 		dealership.setName("Dealership");
 		dealership.setBankBalance(20000);
 		
+		// Main interface loop
 		while (true) {
 			System.out.print("\n" + "Choose first ");
 			firstCompany = selectCompany( ! showDealership);

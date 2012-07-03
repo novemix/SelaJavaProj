@@ -1,5 +1,5 @@
 /**
- * 
+ * CompanyBuySell class for Part2.java car buying/selling application
  */
 package part2.company;
 
@@ -11,18 +11,21 @@ import vehicle.VehicleType;
 import company.*;
 
 /**
- * @author marred01
+ * @author Mark Redden
  *
  */
 public class CompanyBuySell extends Company {
+	// Members
 	protected String m_name = "";
 	protected int m_bankBalance = 0;
 	protected int m_lastCarID, m_lastTruckID, m_lastBikeID;
 
+	// Constructor
 	public CompanyBuySell(String i_inputFile, int i_vehicleMaximum) {
 		super(i_inputFile, i_vehicleMaximum);
-	}
+	} // Constructor
 	
+	// Return vehicle given ID
 	public Vehicle getVehicleByID(String i_id) {
 		Iterator<Vehicle> it = m_vehicles.iterator();
 		Vehicle it_vehicle;
@@ -33,24 +36,25 @@ public class CompanyBuySell extends Company {
 			}
 		}
 		return null;
-	}
+	} // getVehicleByID
 	
 	public void setName(String i_name) {
 		m_name = i_name;
-	}
+	} // setName
 	
 	public String name() {
 		return m_name;
-	}
+	} // name
 	
 	public void setBankBalance(int i_balance) {
 		m_bankBalance = i_balance;
-	}
+	} // setBankBalance
 	
 	public int getBankBalance() {
 		return m_bankBalance;
-	}
+	} // getBankBalance
 	
+	// Check that a transaction will succeed
 	public boolean ableToBuy(Vehicle i_vehicle) {
 		boolean underMax = false;
 		switch (i_vehicle.type()) {
@@ -65,8 +69,9 @@ public class CompanyBuySell extends Company {
 			break;
 		}
 		return (underMax && m_bankBalance >= getVehicleValue(i_vehicle));
-	}
+	} // ableToBuy
 	
+	// Carry out buy transaction
 	public boolean buyVehicle(Vehicle i_vehicle) {
 		if (ableToBuy(i_vehicle)) {
 			i_vehicle.setID(getNewID(i_vehicle.type()));
@@ -92,8 +97,9 @@ public class CompanyBuySell extends Company {
 		else {
 			return false;
 		}
-	}
+	} // buyVehicle
 	
+	// Carry out sell transaction
 	public void sellVehicle(Vehicle i_vehicle) {
 		if (m_vehicles.remove(i_vehicle)) {
 			m_bankBalance += getVehicleValue(i_vehicle);
@@ -109,8 +115,9 @@ public class CompanyBuySell extends Company {
 				break;
 			}
 		}
-	}
+	} // sellVehicle
 	
+	// Calculate a new ID
 	protected String getNewID(VehicleType i_vehicleType) {
 		char letter;
 		int number;
@@ -132,7 +139,7 @@ public class CompanyBuySell extends Company {
 			number = 0;
 		}
 		return letter + ( number < 10 ? "0" : "" ) + number;
-	}
+	} // getNewID
 	
 	protected int getVehicleValue(Vehicle i_vehicle) {
 		// could probably avoid this with generics
@@ -148,13 +155,11 @@ public class CompanyBuySell extends Company {
 		else {
 			return 0;
 		}
-	}
+	} // getVehicleValue
 	
 	@Override
 	protected void parseData(String i_data) {
 		String[] d = i_data.split(",");
-		// TODO: act on boolean return from add, report error and/or throw
-		// exception
 		if (d[0].equals("Car") && m_totalCars < VEHICLE_MAX) {
 			m_vehiclesHashSet.add(new CarWithValue(d[1], d[2], Integer.parseInt(d[3]),
 					Integer.parseInt(d[4]), d[5].equals("yes") ? true : false, Integer.parseInt(d[6])));

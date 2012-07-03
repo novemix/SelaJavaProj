@@ -1,4 +1,6 @@
-
+/**
+ * Company class for Part1.java vehicle displaying application
+ */
 package company;
 
 import java.io.*;
@@ -8,16 +10,13 @@ import java.util.Iterator;
 
 
 import vehicle.*;
-/**
- * 
- */
 
 /**
- * @author marred01
+ * @author Mark Redden
  *
  */
 public class Company {
-	
+		// Members
 		protected final int VEHICLE_MAX;
 		
 		protected int m_totalCars = 0;
@@ -47,6 +46,7 @@ public class Company {
 				
 				String line;
 				while ((line = bufIn.readLine()) != null) {
+					// Parse data line
 					parseData(line);
 				}
 			}
@@ -67,7 +67,6 @@ public class Company {
 		// Called from readInputFile method
 		protected void parseData(String i_data) {
 			String[] d = i_data.split(",");
-			// TODO: act on boolean return from add, report error and/or throw exception
 			if (d[0].equals("Car") && m_totalCars < VEHICLE_MAX) {
 				m_vehiclesHashSet.add(new Car(d[1],d[2],Integer.parseInt(d[3]),Integer.parseInt(d[4]),d[5].equals("yes") ? true : false));
 				m_totalCars++;
@@ -91,7 +90,7 @@ public class Company {
 				case Bike:	return m_totalBikes;
 				default:	return allTotal;
 			}
-		}
+		} // getTotal
 		
 		public void printVehicles(VehicleType i_vehicleType) {
 			Iterator<Vehicle> it = m_vehicles.iterator();
