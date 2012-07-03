@@ -92,26 +92,23 @@ public class Part3 {
 		return input;
 	}
 		
-	static void rentVehicle(Company i_company, VehicleType i_type) {
+	static void rentVehicle(Company i_company, VehicleType i_type, int i_period) {
 		System.out.println("\n" + i_company.name() + " has the following " + i_type + " cars available:");
 		i_company.printVehicles(i_type, availableOnly);
 		String input;
 		Vehicle vehicle;
-		int period;
-		String name;
 		do {
 			System.out.print("Please enter the ID of your choice (or 'none'): ");
 			input = getUserEntry();
 			vehicle = i_company.getVehicleByID(input.toUpperCase());
 		} while ((!input.equals("none") && vehicle == null) || (vehicle != null && !vehicle.m_isAvailable));
 		if ( ! input.equals("none")) {
-			period = selectPeriod();
-			System.out.println("\n" + "Please confirm rental from " + i_company.name() + " for " + period + " days:");
+			System.out.println("\n" + "Please confirm rental from " + i_company.name() + " for " + i_period + " days:");
 			System.out.println(vehicle);
 			System.out.print("\n" + "Enter your name to confirm, or nothing to cancel: ");
-			name = getUserEntry();
+			String name = getUserEntry();
 			if ( ! name.equals("")) {
-				i_company.rentVehicle(vehicle, new Customer(name), period);
+				i_company.rentVehicle(vehicle, new Customer(name), i_period);
 				System.out.println("\n" + "Enjoy your " + vehicle.m_name + "!");
 			}
 			else {
@@ -181,7 +178,7 @@ public class Part3 {
 		while(true) {
 			switch(welcomeMenu()) {
 			case "rent":
-				rentVehicle(selectCompany(), selectVehicleType());
+				rentVehicle(selectCompany(), selectVehicleType(), selectPeriod());
 				break;
 			case "return":
 				returnVehicle(selectCompany());
