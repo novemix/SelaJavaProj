@@ -38,3 +38,11 @@ bin/part2/vehicle/BikeWithValue.class
 bin/part2/vehicle/CarWithValue.class
 
 bin/part2/vehicle/TruckWithValue.class
+
+bin/Part3.class
+
+bin/part3/vehicle/Vehicle.class
+
+bin/part3/company/Company.class
+
+bin/part3/customer/Customer.class

@@ -20,6 +20,7 @@ public class Company {
 	protected String m_name;
 	protected Vehicle m_currentVehicle;
 	protected ArrayList<Customer> m_customers = new ArrayList<Customer>();
+	
 	protected int[] m_totals = new int[VehicleType.All.ordinal() + 1]; // All is the last type
 	protected HashSet<Vehicle> m_vehiclesHashSet = new HashSet<Vehicle>();
 	protected TreeSet<Vehicle> m_vehicles;
@@ -34,6 +35,49 @@ public class Company {
 		m_vehiclesHashSet = null;
 	} // Constructor
 	
+	public Customer getCustomerByName(String i_name) {
+		for (Customer c : m_customers) {
+			if (c.name().equals(i_name)) { return c; }
+		}
+		return null;
+	} // getCustomerByName
+	
+	public boolean returnCustomerVehicle(Customer i_customer) {
+		billCustomer(i_customer);
+		i_customer.rentedVehicle().returnIt();
+		return m_customers.remove(i_customer);
+	} // returnCustomerVehicle
+	
+	public void printVehicles(VehicleType i_vehicleType) {
+		Iterator<Vehicle> it = m_vehicles.iterator();
+		Vehicle it_vehicle;
+		while (it.hasNext()) {
+			it_vehicle = it.next();
+			if (i_vehicleType == VehicleType.All || it_vehicle.type() == i_vehicleType) {
+				System.out.println(it_vehicle);
+			}
+		}
+	} // printVehicles
+	
+	public void printRentedVehicles() {
+		Vehicle v;
+		for (Customer c : m_customers) {
+			v = c.rentedVehicle();
+			System.out.format("%-10s - %-17s - %-18s - %d days\n",v.m_tagID,v.m_name,c.name(),c.period());
+		}
+	} // printRentedVehicles
+
+	public String toString() {
+		return m_name;
+	}
+	
+	protected void billCustomer(Customer i_customer) {
+		int bill = i_customer.period() * i_customer.rentedVehicle().m_pricePerDay;
+		System.out.println("\n" + "Thank you " + i_customer.name() + "!");
+		System.out.println("Your amount due is: " + bill);
+		System.out.println("Have a nice day now.");
+	} // billCustomer
+
 	protected void readInputFile(File i_file) {
 		FileReader input = null;
 		BufferedReader bufIn = null;
@@ -86,7 +130,7 @@ public class Company {
 		case "customer":
 			if (!value.equals("")) {
 				Customer customer = new Customer(value);
-				m_currentVehicle.rent(customer);
+				m_currentVehicle.rent(customer, 1); // 1 day
 				m_customers.add(customer);
 			}
 			break;
@@ -94,7 +138,7 @@ public class Company {
 			m_currentVehicle.m_isSmokeFree = value.equals("yes");
 			break;
 		case "number of seats":
-			m_currentVehicle.m_numberOfSeats = Integer.parseInt(value);
+			m_currentVehicle.m_seats = Integer.parseInt(value);
 			break;
 		case "air bags":
 			m_currentVehicle.m_hasAirBags = value.equals("yes");
@@ -124,17 +168,4 @@ public class Company {
 		}
 	} // parseData
 	
-	public void printVehicles(VehicleType i_vehicleType) {
-		Iterator<Vehicle> it = m_vehicles.iterator();
-		Vehicle it_vehicle;
-		while (it.hasNext()) {
-			it_vehicle = it.next();
-			if (i_vehicleType == VehicleType.All || it_vehicle.type() == i_vehicleType) {
-				System.out.println(it_vehicle);
-			}
-		}
-		for (Customer c : m_customers) {
-			System.out.println(c);
-		}
-	} // printVehicles
 }

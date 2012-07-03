@@ -1,7 +1,5 @@
 import java.util.Scanner;
 
-import part2.company.CompanyBuySell;
-
 import company.*;
 import vehicle.UserInterface;
 import vehicle.VehicleType;

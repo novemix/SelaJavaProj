@@ -13,9 +13,10 @@ public class Vehicle implements Comparable<Vehicle>{
 	public String m_tagID;
 	public boolean m_isAvailable = false;
 	public int m_pricePerDay;
+	public int m_period;
 	public String m_customerName = "";
 	public boolean m_isSmokeFree = false;
-	public int m_numberOfSeats;
+	public int m_seats;
 	public boolean m_hasAirBags = false;
 	public boolean m_hasAC = false;
 	public boolean m_isAutomatic = false;
@@ -33,20 +34,32 @@ public class Vehicle implements Comparable<Vehicle>{
 		return m_type;
 	}
 	
-	public void rent(Customer i_customer) {
+	public void rent(Customer i_customer, int i_period) {
 		m_customerName = i_customer.name();
 		m_isAvailable = false;
-		i_customer.rentVehicle(this);
+		i_customer.rentVehicle(this, i_period);
 	}
 	
-	public void returnIt(Customer i_customer) {
+	public void returnIt() {
 		m_customerName = "";
 		m_isAvailable = true;
-		i_customer.returnVehicle();
 	}
-	
+
 	public String toString() {
-		return m_name + " - " + m_tagID + " - " + m_type + " - avail: " + m_isAvailable;
+		return String.format("%-10s - %-6s - %-17s - Price: %3d", m_tagID,
+				m_type, m_name, m_pricePerDay)
+				+ "\n"
+				+ String.format(
+						"  - No Smoke: %-3s - Seats: %3d - Air Bags: %-3s - AC: %-3s",
+						m_isSmokeFree ? "yes" : "no", m_seats,
+						m_hasAirBags ? "yes" : "no", m_hasAC ? "yes" : "no")
+				+ "\n"
+				+ String.format(
+						"  -     Auto: %-3s - AM/FM: %-3s - Pwr: Win:%1s Brk:%1s Str:%1s",
+						m_isAutomatic ? "yes" : "no", m_hasAMFMradio ? "yes"
+								: "no", m_hasPowerWindows ? "Y" : "N",
+						m_hasPowerBrakes ? "Y" : "N",
+						m_hasPowerSteering ? "Y" : "N");
 	}
 	
 	public int compareTo(Vehicle i_vehicle) {
